@@ -9,7 +9,7 @@
     script-src 'self';
     style-src 'self';
     connect-src 'self' https://api.github.com;
-    img-src data:;
+    img-src data: 'self';
     base-uri 'self';
     form-action 'none';
   " />
@@ -23,10 +23,12 @@
   <meta property="og:title" content="Threat Name Generator" />
   <meta property="og:description" content="Generate original names for threat groups, campaigns, and malware. 700+ real names excluded automatically." />
   <meta property="og:url" content="https://cyberpros.co/" />
+  <meta property="og:image" content="https://cyberpros.co/og-image.svg" />
   <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Threat Name Generator" />
   <meta name="twitter:description" content="Generate original names for threat groups, campaigns, and malware. 700+ real names excluded automatically." />
+  <meta name="twitter:image" content="https://cyberpros.co/og-image.svg" />
   <!-- JSON-LD -->
   <script type="application/ld+json">
   {

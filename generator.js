@@ -214,7 +214,7 @@ const WORD_BANKS = {
       'Register','Gate','Bridge','Payload','Exploit','Overflow','Injection',
       'Escalation','Pivot','Exfil','Backdoor','Rootkit','Beacon','Hook','Shim',
       'Probe','Scan','Traverse','Bypass','Intercept','Tunnel','Proxy','Relay',
-      'Splice','Fork','Splice','Patch','Patch','Canary','Trap','Segment',
+      'Splice','Fork','Patch','Canary','Trap','Segment',
       'Sector','Cluster','Block','Chain','Node','Mesh','Vector','Matrix'],
     concepts: ['Overflow','Injection','Traversal','Escalation','Exfiltration',
       'Persistence','Evasion','Obfuscation','Enumeration','Reconnaissance',
@@ -444,7 +444,7 @@ function buildIssueURL(name, type, source) {
     `## Name Submission\n\n**Name:** ${name}\n**Type:** ${type}\n**Source:** ${source || 'N/A'}\n\n` +
     `This name should be added to the exclusion list as it is a known/published threat entity.`
   );
-  return `https://github.com/${GITHUB_REPO}/issues/new?template=name-submission.yml&title=${title}&body=${body}`;
+  return `https://github.com/${GITHUB_REPO}/issues/new?title=${title}&body=${body}`;
 }
 
 function buildClaimIssueURL(name, type) {
@@ -590,7 +590,7 @@ function showResult(type, flavour) {
 
     generatedCount++;
     document.getElementById('stat-generated').textContent =
-      `○ ${generatedCount} generated this session`;
+      `◎ ${generatedCount} generated this session`;
 
     btn.classList.remove('loading');
     btn.querySelector('.btn-text').textContent = 'GENERATE';
