@@ -428,6 +428,36 @@ function buildIssueURL(name, type, source) {
   return `https://github.com/${GITHUB_REPO}/issues/new?template=name-submission.yml&title=${title}&body=${body}`;
 }
 
+function buildClaimIssueURL(name, type) {
+  const title = encodeURIComponent(`Claim: ${name} (${type})`);
+  const body = encodeURIComponent(
+    `## Name Claim\n\n**Name:** ${name}\n**Type:** ${type}\n\n` +
+    `I am claiming this generated name to reserve it from future generation.\n\n` +
+    `_This issue was created via the Threat Name Generator._`
+  );
+  return `https://github.com/${GITHUB_REPO}/issues/new?title=${title}&body=${body}&labels=claimed`;
+}
+
+// ── Load claimed names from GitHub Issues API ──
+function loadClaimedNames() {
+  fetch(`https://api.github.com/repos/${GITHUB_REPO}/issues?labels=claimed&state=open&per_page=100`)
+    .then(r => r.ok ? r.json() : [])
+    .then(issues => {
+      let added = 0;
+      issues.forEach(issue => {
+        const match = issue.title.match(/^Claim:\s*(.+?)\s*\((\w+)\)\s*$/i);
+        if (!match) return;
+        const [, name, type] = match;
+        if (type === 'group') KNOWN_NAMES.groups.add(name);
+        else if (type === 'campaign') KNOWN_NAMES.campaigns.add(name);
+        else if (type === 'malware') KNOWN_NAMES.malware.add(name);
+        added++;
+      });
+      if (added > 0) updateStatsBar();
+    })
+    .catch(() => {});
+}
+
 // ── Session state ──
 
 let generatedCount = 0;
@@ -442,6 +472,8 @@ function updateStatsBar() {
   const el = document.getElementById('stat-known');
   if (el) el.textContent = `◈ ${total.toLocaleString()} known threat names loaded`;
 }
+
+loadClaimedNames();
 
 fetch('data/community-names.json')
   .then(r => r.json())
@@ -632,6 +664,28 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('save-btn').addEventListener('click', () => {
     if (!currentName) return;
     addToSaved(currentName);
+  });
+
+  // Claim modal
+  const claimOverlay = document.getElementById('claim-overlay');
+
+  document.getElementById('claim-btn').addEventListener('click', () => {
+    if (!currentName) return;
+    document.getElementById('claim-name-display').textContent = currentName.name;
+    document.getElementById('claim-issue-btn').href = buildClaimIssueURL(currentName.name, currentName.type);
+    claimOverlay.classList.remove('hidden');
+  });
+
+  document.getElementById('claim-cancel-btn').addEventListener('click', () => {
+    claimOverlay.classList.add('hidden');
+  });
+
+  claimOverlay.addEventListener('click', e => {
+    if (e.target === claimOverlay) claimOverlay.classList.add('hidden');
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') claimOverlay.classList.add('hidden');
   });
 
   // Flag as real name — pre-fills submit form and scrolls to it

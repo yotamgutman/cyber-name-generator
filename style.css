@@ -531,6 +531,8 @@ main {
 
 .action-btn.copied { color: var(--green); border-color: var(--green); }
 .action-btn--flag:hover { color: var(--yellow) !important; border-color: var(--cmp-yellow) !important; }
+.action-btn--claim { color: var(--cmp-yellow) !important; border-color: rgba(255,184,0,0.5) !important; }
+.action-btn--claim:hover { background: rgba(255,184,0,0.1) !important; border-color: var(--cmp-yellow) !important; box-shadow: 0 0 12px rgba(255,184,0,0.2); }
 
 .conflict-banner {
   font-family: var(--font-mono);
@@ -672,6 +674,139 @@ footer {
 
 footer a { color: var(--cyan); text-decoration: none; opacity: 0.7; }
 footer a:hover { opacity: 1; }
+
+/* ── Claim modal ── */
+.claim-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.claim-overlay.hidden { display: none; }
+
+.claim-modal {
+  background: var(--surface);
+  border: 1px solid rgba(255,184,0,0.4);
+  border-radius: 10px;
+  padding: 2rem;
+  max-width: 420px;
+  width: 100%;
+  box-shadow: 0 0 60px rgba(255,184,0,0.15), 0 20px 60px rgba(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  animation: modal-in 0.2s ease;
+}
+
+@keyframes modal-in {
+  from { opacity: 0; transform: scale(0.95) translateY(8px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.claim-modal-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: var(--cmp-yellow);
+}
+
+.claim-lightning { font-size: 1.1rem; }
+
+.claim-name-display {
+  font-family: var(--font-mono);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text-bright);
+  letter-spacing: 0.03em;
+  line-height: 1.2;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 1rem;
+}
+
+.claim-description {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.claim-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.claim-step-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border-bright);
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  text-decoration: none;
+  color: var(--text);
+  font-size: 0.85rem;
+  transition: all 0.15s ease;
+}
+
+.claim-step-btn:hover {
+  background: rgba(255,255,255,0.06);
+  border-color: var(--cyan);
+  color: var(--cyan);
+}
+
+.claim-step-btn--star {
+  border-color: rgba(255,184,0,0.35);
+  color: var(--cmp-yellow);
+}
+
+.claim-step-btn--star:hover {
+  background: rgba(255,184,0,0.08);
+  border-color: var(--cmp-yellow);
+  box-shadow: 0 0 16px rgba(255,184,0,0.15);
+  color: var(--cmp-yellow);
+}
+
+.step-num {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  background: var(--border-bright);
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.step-text { flex: 1; }
+.step-arrow { font-size: 0.8rem; opacity: 0.5; }
+
+.claim-cancel-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  padding: 0.25rem;
+  align-self: center;
+  transition: color 0.15s;
+}
+
+.claim-cancel-btn:hover { color: var(--text); }
 
 /* ── Utility ── */
 .hidden { display: none !important; }

@@ -126,6 +126,9 @@
             <button class="action-btn action-btn--flag" id="flag-btn" title="This is a real threat name — submit it for exclusion">
               <span>&#x2691;</span> REAL NAME
             </button>
+            <button class="action-btn action-btn--claim" id="claim-btn" title="Claim this name — reserve it from future generation">
+              <span>&#x26A1;</span> CLAIM
+            </button>
           </div>
           <div class="conflict-banner hidden" id="conflict-banner">
             <span>&#9888;</span> Name conflict with known threat entity
@@ -154,6 +157,33 @@
       <span id="db-date">DB: bundled seed data</span>
     </p>
   </footer>
+
+  <!-- Claim modal -->
+  <div class="claim-overlay hidden" id="claim-overlay">
+    <div class="claim-modal">
+      <div class="claim-modal-header">
+        <span class="claim-lightning">&#x26A1;</span>
+        <span class="claim-modal-title">CLAIM NAME</span>
+      </div>
+      <div class="claim-name-display" id="claim-name-display"></div>
+      <p class="claim-description">
+        Reserve this name. Once claimed, it will be excluded from future generation for all users.
+      </p>
+      <div class="claim-steps">
+        <a class="claim-step-btn" id="claim-issue-btn" href="#" target="_blank" rel="noopener">
+          <span class="step-num">1</span>
+          <span class="step-text">Open claim on GitHub</span>
+          <span class="step-arrow">&#x2197;</span>
+        </a>
+        <a class="claim-step-btn claim-step-btn--star" id="claim-star-btn" href="https://github.com/yotamgutman/cyber-name-generator" target="_blank" rel="noopener">
+          <span class="step-num">2</span>
+          <span class="step-text">&#x2605; Star the repo to lock it in</span>
+          <span class="step-arrow">&#x2197;</span>
+        </a>
+      </div>
+      <button class="claim-cancel-btn" id="claim-cancel-btn">Cancel</button>
+    </div>
+  </div>
 
   <script src="generator.js"></script>
 </body>
