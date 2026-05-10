@@ -1,6 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
   <rect width="1200" height="630" fill="#0d0d0d"/>
-  <!-- Grid lines -->
   <line x1="0" y1="315" x2="1200" y2="315" stroke="#1a1a2e" stroke-width="1"/>
   <line x1="600" y1="0" x2="600" y2="630" stroke="#1a1a2e" stroke-width="1"/>
   <!-- Corner accents -->
@@ -8,12 +7,17 @@
   <polyline points="1140,60 1140,30 1110,30" fill="none" stroke="#FFB800" stroke-width="3"/>
   <polyline points="60,570 60,600 90,600" fill="none" stroke="#FFB800" stroke-width="3"/>
   <polyline points="1140,570 1140,600 1110,600" fill="none" stroke="#FFB800" stroke-width="3"/>
-  <!-- Diamond icon -->
-  <polygon points="600,160 630,195 600,230 570,195" fill="#FFB800"/>
+  <!-- Padlock icon -->
+  <g transform="translate(540,100)">
+    <path d="M14,52 L14,36 A46,46 0 0,1 106,36 L106,52" fill="none" stroke="#FFB800" stroke-width="14" stroke-linecap="round"/>
+    <rect x="0" y="48" width="120" height="80" rx="14" fill="#FFB800"/>
+    <circle cx="60" cy="80" r="14" fill="#0d0d0d"/>
+    <rect x="53" y="88" width="14" height="20" rx="3" fill="#0d0d0d"/>
+  </g>
   <!-- Title -->
-  <text x="600" y="320" font-family="Arial Black,Impact,sans-serif" font-weight="900" font-size="72" fill="#e8e8e8" text-anchor="middle" letter-spacing="4">THREAT NAME GEN</text>
+  <text x="600" y="310" font-family="Arial Black,Impact,sans-serif" font-weight="900" font-size="72" fill="#e8e8e8" text-anchor="middle" letter-spacing="4">THREAT NAME GENERATOR</text>
   <!-- Subtitle -->
-  <text x="600" y="390" font-family="Arial,sans-serif" font-size="28" fill="#888888" text-anchor="middle" letter-spacing="2">Generate original names for threat actors, campaigns &amp; malware</text>
-  <!-- Stats hint -->
-  <text x="600" y="460" font-family="Arial,sans-serif" font-size="22" fill="#FFB800" text-anchor="middle" letter-spacing="1">700+ known names excluded · cyberpros.co</text>
+  <text x="600" y="380" font-family="Arial,sans-serif" font-size="28" fill="#888888" text-anchor="middle" letter-spacing="2">APT groups · campaigns · malware · 700+ real names excluded</text>
+  <!-- Domain -->
+  <text x="600" y="460" font-family="Arial,sans-serif" font-size="22" fill="#FFB800" text-anchor="middle" letter-spacing="1">cyberpros.co</text>
 </svg>

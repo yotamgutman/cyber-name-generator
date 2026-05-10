@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <rect width="100" height="100" rx="18" fill="#000000"/>
+  <!-- Shackle -->
+  <path d="M29,52 L29,36 A21,21 0 0,1 71,36 L71,52" fill="none" stroke="#FFB800" stroke-width="11" stroke-linecap="round"/>
+  <!-- Lock body -->
+  <rect x="17" y="49" width="66" height="44" rx="9" fill="#FFB800"/>
+  <!-- Keyhole circle -->
+  <circle cx="50" cy="67" r="8" fill="#000"/>
+  <!-- Keyhole stem -->
+  <rect x="46.5" y="71" width="7" height="10" rx="2" fill="#000"/>
+</svg>

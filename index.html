@@ -14,35 +14,96 @@
     form-action 'none';
   " />
   <meta name="referrer" content="no-referrer" />
-  <title>Threat Name Generator — Cyber Marketing Pros</title>
-  <meta name="description" content="Generate original names for threat groups, APT campaigns, and malware. 700+ known names excluded. Choose from Natural, Mythological, Technical, Literature, and Mesh-up flavours." />
-  <meta name="keywords" content="threat name generator, APT name generator, malware name generator, cyber threat naming, threat actor names, cybersecurity research tools" />
+  <title>APT &amp; Threat Name Generator — Free Tool for Cybersecurity Pros</title>
+  <meta name="description" content="Free threat name generator for APT groups, campaigns, and malware. 700+ real-world names excluded automatically. Choose naming flavours: natural, mythological, technical, literary, or custom anchor word." />
+  <meta name="keywords" content="threat name generator, APT name generator, malware name generator, threat actor name generator, cyber threat naming, threat group names, cybersecurity research tools, CTF naming tool" />
   <link rel="canonical" href="https://cyberpros.co/" />
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Threat Name Generator" />
-  <meta property="og:description" content="Generate original names for threat groups, campaigns, and malware. 700+ real names excluded automatically." />
+  <meta property="og:title" content="APT &amp; Threat Name Generator — Free Tool for Cybersecurity Pros" />
+  <meta property="og:description" content="Free threat name generator for APT groups, campaigns, and malware. 700+ real-world names excluded. Custom anchor word, 5 naming flavours." />
   <meta property="og:url" content="https://cyberpros.co/" />
   <meta property="og:image" content="https://cyberpros.co/og-image.svg" />
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Threat Name Generator" />
-  <meta name="twitter:description" content="Generate original names for threat groups, campaigns, and malware. 700+ real names excluded automatically." />
+  <meta name="twitter:title" content="APT &amp; Threat Name Generator — Free Tool for Cybersecurity Pros" />
+  <meta name="twitter:description" content="Free threat name generator for APT groups, campaigns, and malware. 700+ real-world names excluded. Custom anchor word, 5 naming flavours." />
   <meta name="twitter:image" content="https://cyberpros.co/og-image.svg" />
-  <!-- JSON-LD -->
+  <!-- JSON-LD: WebApplication -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    "name": "Threat Name Generator",
+    "name": "APT and Threat Name Generator",
     "url": "https://cyberpros.co/",
-    "description": "Generate original names for cyber threat groups, campaigns, and malware with a built-in exclusion list of 700+ known real-world names.",
+    "description": "Free tool for generating original names for cyber threat groups, APT campaigns, and malware. Built-in exclusion list of 700+ known real-world threat names.",
     "applicationCategory": "SecurityApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
     "creator": {
       "@type": "Organization",
       "name": "Cyber Marketing Pros",
       "url": "https://cybermarketingpros.com"
     }
+  }
+  </script>
+  <!-- JSON-LD: FAQ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a threat name generator?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A threat name generator creates original, plausible names for cybersecurity threat actors, APT groups, malware families, and attack campaigns. This tool generates names in the style used by major threat intelligence vendors while automatically excluding 700+ real-world known threat names to avoid conflicts."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does the exclusion list work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The tool maintains a database of 700+ publicly documented threat actor names sourced from MITRE ATT&CK, Malpedia, and other threat intelligence sources. With Strict Exclusion enabled, any generated name that matches a known threat entity is automatically discarded and regenerated."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What naming flavours are available?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Five naming flavours are available: Natural (elements, weather, geology, organisms), Mythological (gods, creatures, ancient concepts), Technical (protocols, exploit terms, security concepts), Literature (gothic and dystopian literary references), and Mesh-up (hybrid of two flavours). A Random option selects a flavour automatically."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use an anchor word?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Enter any word in the Anchor Word field and the generator will build a name around it, pairing it with a word from the selected flavour's word bank. For example, entering 'Raven' with Technical flavour might produce 'Raven Stack' or 'Operation RavenKernel'."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use generated names commercially?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Generated names are not legally cleared. The exclusion list covers documented threat actors but is not exhaustive. Before any commercial, public, or operational use you must conduct your own trademark and IP clearance checks. This tool does not provide legal advice."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Who is this tool for?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The tool is built for cybersecurity marketers, researchers, threat intelligence analysts, and CTF organizers who need plausible threat actor names for thought leadership content, demos, training scenarios, tabletop exercises, and research — without accidentally reusing a real-world threat group name."
+        }
+      }
+    ]
   }
   </script>
   <link rel="stylesheet" href="style.css" />
@@ -54,7 +115,7 @@
       <div class="header-top-row">
         <div class="logo-area">
           <span class="logo-icon">&#9670;</span>
-          <h1 class="glitch" data-text="THREAT NAME GEN">THREAT NAME GEN</h1>
+          <h1 class="glitch" data-text="THREAT NAME GENERATOR">THREAT NAME GENERATOR</h1>
         </div>
         <a href="https://cybermarketingpros.com" target="_blank" class="cmp-brand" title="Cyber Marketing Pros">
           <svg class="cmp-logo-svg" viewBox="0 0 220 90" xmlns="http://www.w3.org/2000/svg">
@@ -214,6 +275,38 @@
           <a href="https://www.linkedin.com/company/cybersecurity-marketing-community" target="_blank" rel="noopener noreferrer" class="about-link">Cybersecurity Marketing Community</a>
           <span class="about-sep">&#x2022;</span>
           <a href="https://github.com/yotamgutman/cyber-name-generator" target="_blank" rel="noopener noreferrer" class="about-link">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq-section" id="faq">
+    <div class="faq-inner">
+      <h2 class="faq-title">About This Tool</h2>
+      <div class="faq-grid">
+        <div class="faq-item">
+          <h3 class="faq-q">What is a threat name generator?</h3>
+          <p class="faq-a">A threat name generator creates original, plausible names for cybersecurity threat actors, APT groups, malware families, and attack campaigns. This tool generates names in the style used by major threat intelligence vendors while automatically excluding 700+ real-world known threat names to avoid conflicts.</p>
+        </div>
+        <div class="faq-item">
+          <h3 class="faq-q">How does the exclusion list work?</h3>
+          <p class="faq-a">The database covers 700+ publicly documented threat actor names sourced from MITRE ATT&amp;CK, Malpedia, and other threat intelligence feeds. With Strict Exclusion enabled, any generated name that matches a known threat entity is discarded and regenerated automatically.</p>
+        </div>
+        <div class="faq-item">
+          <h3 class="faq-q">What naming flavours are available?</h3>
+          <p class="faq-a">Five flavours: Natural (elements, weather, geology, organisms), Mythological (gods, creatures, ancient concepts), Technical (protocols, exploit terms, security concepts), Literature (gothic and dystopian references), and Mesh-up (hybrid of two flavours). Random selects one automatically.</p>
+        </div>
+        <div class="faq-item">
+          <h3 class="faq-q">Can I use an anchor word?</h3>
+          <p class="faq-a">Yes. Enter any word in the Anchor Word field and the generator builds a name around it, pairing it with a word from the selected flavour's word bank. For example, "Raven" with Technical flavour might produce "Raven Stack" or "Operation RavenKernel".</p>
+        </div>
+        <div class="faq-item">
+          <h3 class="faq-q">Who is this for?</h3>
+          <p class="faq-a">Cybersecurity marketers, researchers, threat intelligence analysts, and CTF organizers who need plausible threat actor names for thought leadership content, demos, training scenarios, tabletop exercises, and red team engagements — without reusing a real-world threat group name.</p>
+        </div>
+        <div class="faq-item">
+          <h3 class="faq-q">Can I use generated names commercially?</h3>
+          <p class="faq-a">Generated names are not legally cleared. The exclusion list covers documented threat actors but is not exhaustive. Before any commercial, public, or operational use, conduct your own trademark and IP clearance checks. This tool does not provide legal advice.</p>
         </div>
       </div>
     </div>
