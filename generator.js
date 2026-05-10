@@ -646,7 +646,23 @@ function exportCSV() {
 
 // ── Event wiring ──
 
+// ── Legal disclaimer ──
+function showDisclaimer() {
+  document.getElementById('legal-overlay').classList.remove('hidden');
+}
+
+function hideDisclaimer() {
+  document.getElementById('legal-overlay').classList.add('hidden');
+  localStorage.setItem('disclaimerAccepted', '1');
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+  // Show disclaimer on first visit
+  if (!localStorage.getItem('disclaimerAccepted')) showDisclaimer();
+
+  document.getElementById('legal-accept-btn').addEventListener('click', hideDisclaimer);
+  document.getElementById('reopen-disclaimer-btn').addEventListener('click', showDisclaimer);
+
   // Pill selectors
   document.getElementById('type-selector').addEventListener('click', e => {
     const pill = e.target.closest('.pill');

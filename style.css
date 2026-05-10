@@ -675,6 +675,125 @@ footer {
 footer a { color: var(--cyan); text-decoration: none; opacity: 0.7; }
 footer a:hover { opacity: 1; }
 
+/* ── Legal disclaimer modal ── */
+.legal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(6px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.legal-overlay.hidden { display: none; }
+
+.legal-modal {
+  background: var(--surface);
+  border: 1px solid rgba(255,214,0,0.35);
+  border-radius: 10px;
+  padding: 2.25rem;
+  max-width: 480px;
+  width: 100%;
+  box-shadow: 0 0 60px rgba(255,214,0,0.1), 0 24px 60px rgba(0,0,0,0.6);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  animation: modal-in 0.25s ease;
+}
+
+.legal-icon {
+  font-size: 2rem;
+  color: var(--yellow);
+  text-align: center;
+}
+
+.legal-title {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--text-bright);
+  text-align: center;
+  margin: 0;
+}
+
+.legal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 1.1rem 0;
+}
+
+.legal-body p {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+.legal-body strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.legal-not-advice {
+  font-family: var(--font-mono);
+  font-size: 0.72rem !important;
+  color: var(--text-muted) !important;
+  opacity: 0.7;
+  border-left: 2px solid var(--border-bright);
+  padding-left: 0.65rem;
+}
+
+.legal-accept-btn {
+  background: linear-gradient(135deg, rgba(255,214,0,0.15), rgba(255,214,0,0.05));
+  border: 1px solid rgba(255,214,0,0.5);
+  color: var(--yellow);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  align-self: stretch;
+}
+
+.legal-accept-btn:hover {
+  background: linear-gradient(135deg, rgba(255,214,0,0.25), rgba(255,214,0,0.1));
+  box-shadow: 0 0 20px rgba(255,214,0,0.2);
+}
+
+/* ── Footer disclaimer ── */
+.footer-disclaimer {
+  font-size: 0.75rem;
+  color: var(--yellow);
+  opacity: 0.75;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.footer-disclaimer-link {
+  background: none;
+  border: none;
+  color: var(--yellow);
+  font-size: 0.72rem;
+  cursor: pointer;
+  text-decoration: underline;
+  opacity: 0.7;
+  padding: 0;
+  font-family: var(--font-ui);
+}
+
+.footer-disclaimer-link:hover { opacity: 1; }
+
 /* ── Claim modal ── */
 .claim-overlay {
   position: fixed;
