@@ -1,0 +1,6 @@
+{
+  "_readme": "Community-submitted known threat names. Add entries here via PR after a name-submission issue is reviewed. The website loads this file on startup and merges it into the exclusion list.",
+  "groups": [],
+  "campaigns": [],
+  "malware": []
+}

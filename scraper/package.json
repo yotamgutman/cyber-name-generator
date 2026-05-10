@@ -1,0 +1,12 @@
+{
+  "name": "threat-name-scraper",
+  "version": "1.0.0",
+  "description": "Scrapes MITRE ATT&CK and Wikipedia for known threat names",
+  "main": "scrape.js",
+  "scripts": {
+    "scrape": "node scrape.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

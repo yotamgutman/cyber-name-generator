@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Threat Name Generator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <div class="header-top-row">
+        <div class="logo-area">
+          <span class="logo-icon">&#9670;</span>
+          <h1 class="glitch" data-text="THREAT NAME GEN">THREAT NAME GEN</h1>
+        </div>
+        <a href="https://cybermarketingpros.com" target="_blank" class="cmp-brand" title="Cyber Marketing Pros">
+          <svg class="cmp-logo-svg" viewBox="0 0 220 90" xmlns="http://www.w3.org/2000/svg">
+            <text x="4" y="28" font-family="Arial Black,Impact,sans-serif" font-weight="900" font-size="26" fill="#888888" letter-spacing="1">CYBER</text>
+            <text x="4" y="56" font-family="Arial Black,Impact,sans-serif" font-weight="900" font-size="26" fill="#888888" letter-spacing="1">MARKETING</text>
+            <!-- PROS: PR + lock-O + S -->
+            <text x="4" y="84" font-family="Arial Black,Impact,sans-serif" font-weight="900" font-size="26" fill="#FFB800" letter-spacing="1">PR</text>
+            <!-- lock body -->
+            <rect x="47" y="64" width="22" height="16" rx="3" fill="#FFB800"/>
+            <!-- lock shackle -->
+            <path d="M51,64 L51,57 A7,7 0 0,1 65,57 L65,64" fill="none" stroke="#FFB800" stroke-width="4" stroke-linecap="round"/>
+            <!-- keyhole -->
+            <circle cx="58" cy="70" r="3" fill="#111"/>
+            <rect x="56.5" y="70" width="3" height="5" rx="0.8" fill="#111"/>
+            <text x="72" y="84" font-family="Arial Black,Impact,sans-serif" font-weight="900" font-size="26" fill="#FFB800" letter-spacing="1">S</text>
+          </svg>
+        </a>
+      </div>
+      <p class="subtitle">Generate plausible names for threat actors, campaigns &amp; malware</p>
+      <div class="stats-bar">
+        <span id="stat-known">&#9678; Loading known names...</span>
+        <span class="sep">&#124;</span>
+        <span id="stat-generated">&#9678; 0 generated this session</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="controls-panel">
+
+      <div class="control-group">
+        <label class="control-label">TYPE</label>
+        <div class="pill-group" id="type-selector">
+          <button class="pill active" data-value="group">&#x25C8; Group</button>
+          <button class="pill" data-value="campaign">&#x25C8; Campaign</button>
+          <button class="pill" data-value="malware">&#x25C8; Malware</button>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label">FLAVOUR</label>
+        <div class="pill-group" id="flavour-selector">
+          <button class="pill active" data-value="natural">&#x2736; Natural</button>
+          <button class="pill" data-value="mythological">&#x2736; Mythological</button>
+          <button class="pill" data-value="technical">&#x2736; Technical</button>
+          <button class="pill" data-value="literature">&#x2736; Literature</button>
+          <button class="pill" data-value="mashup">&#x2736; Mesh-up</button>
+          <button class="pill" data-value="random">&#x2731; Random</button>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label">OPTIONS</label>
+        <div class="options-row">
+          <label class="toggle-wrap">
+            <input type="checkbox" id="opt-explain" checked />
+            <span class="toggle-label">Show etymology</span>
+          </label>
+          <label class="toggle-wrap">
+            <input type="checkbox" id="opt-strict" checked />
+            <span class="toggle-label">Strict exclusion</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="control-group submit-group">
+        <label class="control-label">SUBMIT KNOWN NAME</label>
+        <p class="submit-hint">Know a real threat name not in the list? Submit it for exclusion.</p>
+        <div class="submit-row">
+          <input type="text" id="submit-name-input" class="submit-input" placeholder="Name..." autocomplete="off" spellcheck="false" />
+          <select id="submit-type-select" class="submit-select">
+            <option value="group">Group</option>
+            <option value="campaign">Campaign</option>
+            <option value="malware">Malware</option>
+          </select>
+        </div>
+        <input type="url" id="submit-source-input" class="submit-input" placeholder="Source URL (required)..." autocomplete="off" />
+        <button class="submit-btn" id="submit-known-btn">&#x2691; OPEN GITHUB ISSUE</button>
+      </div>
+
+      <button class="generate-btn" id="generate-btn">
+        <span class="btn-text">GENERATE</span>
+        <span class="btn-icon">&#9654;</span>
+      </button>
+
+    </section>
+
+    <section class="result-panel">
+      <div class="result-card" id="result-card">
+        <div class="result-placeholder" id="result-placeholder">
+          <span class="placeholder-icon">&#x25EF;</span>
+          <p>Select type and flavour, then hit GENERATE</p>
+        </div>
+
+        <div class="result-content hidden" id="result-content">
+          <div class="result-type-badge" id="result-badge">GROUP</div>
+          <div class="result-name" id="result-name"></div>
+          <div class="result-flavour-tag" id="result-flavour-tag"></div>
+          <div class="result-etymology" id="result-etymology"></div>
+          <div class="result-actions">
+            <button class="action-btn" id="copy-btn" title="Copy to clipboard">
+              <span>&#x2398;</span> COPY
+            </button>
+            <button class="action-btn" id="save-btn" title="Save to list">
+              <span>&#x2295;</span> SAVE
+            </button>
+            <button class="action-btn" id="regen-btn" title="Regenerate">
+              <span>&#x21BB;</span> AGAIN
+            </button>
+            <button class="action-btn action-btn--flag" id="flag-btn" title="This is a real threat name — submit it for exclusion">
+              <span>&#x2691;</span> REAL NAME
+            </button>
+          </div>
+          <div class="conflict-banner hidden" id="conflict-banner">
+            <span>&#9888;</span> Name conflict with known threat entity
+          </div>
+        </div>
+      </div>
+
+      <div class="saved-panel" id="saved-panel">
+        <div class="saved-header">
+          <span>SAVED NAMES</span>
+          <button class="clear-btn" id="clear-saved-btn" title="Clear saved">&#x2715;</button>
+        </div>
+        <div class="saved-list" id="saved-list">
+          <p class="saved-empty">No names saved yet</p>
+        </div>
+        <button class="export-btn" id="export-btn">&#x2913; EXPORT CSV</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Names are generated for research, threat modeling, and CTF use. Built with MITRE ATT&CK + Wikipedia data.</p>
+    <p>
+      <a href="scraper/README.md" target="_blank">How to update name database</a>
+      &nbsp;&#124;&nbsp;
+      <span id="db-date">DB: bundled seed data</span>
+    </p>
+  </footer>
+
+  <script src="generator.js"></script>
+</body>
+</html>

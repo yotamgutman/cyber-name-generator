@@ -1,0 +1,47 @@
+name: Submit a Known Threat Name
+description: Report a real threat group, campaign, or malware name to add to the exclusion list
+title: "Exclude: [NAME]"
+labels: ["name-submission"]
+body:
+  - type: dropdown
+    id: type
+    attributes:
+      label: Type
+      description: What category does this name belong to?
+      options:
+        - Threat Group / APT
+        - Campaign / Operation
+        - Malware / Tool
+    validations:
+      required: true
+
+  - type: input
+    id: name
+    attributes:
+      label: Name
+      description: The exact name as it appears in published reporting
+      placeholder: e.g. Fancy Bear, Operation Aurora, WannaCry
+    validations:
+      required: true
+
+  - type: input
+    id: aliases
+    attributes:
+      label: Known aliases (optional)
+      description: Other names for the same entity, comma-separated
+      placeholder: e.g. APT28, Sofacy, STRONTIUM
+
+  - type: input
+    id: source
+    attributes:
+      label: Source URL
+      description: Link to a public report, vendor blog, MITRE entry, or news article confirming this name
+      placeholder: https://
+    validations:
+      required: true
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes (optional)
+      description: Any context — attribution, first seen, family relationship, etc.

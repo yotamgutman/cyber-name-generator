@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: MITRE ATT&CK
+    url: https://attack.mitre.org
+    about: Browse the canonical ATT&CK catalog of groups and software
