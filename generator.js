@@ -326,18 +326,19 @@ const ETYMOLOGY = {
   natural: (word) => {
     const metalTerms = new Set(['Iron','Steel','Copper','Lead','Mercury','Tungsten','Titanium','Cobalt','Nickel','Chromium','Radium','Uranium','Beryllium','Bismuth','Osmium','Iridium','Cesium','Arsenic','Phosphorus','Sulfur','Vanadium','Gallium','Antimony','Tellurium','Thallium','Barium','Strontium','Lithium']);
     const forceTerms = new Set(['Storm','Tornado','Hurricane','Tsunami','Avalanche','Eruption','Blizzard','Wildfire','Geyser','Maelstrom','Vortex','Riptide','Undertow','Firestorm','Permafrost','Thunderhead','Sandstorm','Flashflood','Cyclone','Monsoon','Hailstorm','Landslide','Mudslide','Rockfall','Whirlpool','Whirlwind']);
-    if (metalTerms.has(word)) return `Named after the element or alloy <span class="ety-part">${word}</span> — metals evoke density, hardness, and conductivity, suggesting a threat that is persistent, resilient, and difficult to dislodge.`;
-    if (forceTerms.has(word)) return `Named after the natural force <span class="ety-part">${word}</span> — weather and geological events imply overwhelming, rapid, or large-scale impact. A popular convention among nation-state attribution frameworks.`;
-    return `Drawn from the natural world: <span class="ety-part">${word}</span> references a geological feature or natural phenomenon, projecting power, unpredictability, and environmental scale.`;
+    const w = esc(word);
+    if (metalTerms.has(word)) return `Named after the element or alloy <span class="ety-part">${w}</span> — metals evoke density, hardness, and conductivity, suggesting a threat that is persistent, resilient, and difficult to dislodge.`;
+    if (forceTerms.has(word)) return `Named after the natural force <span class="ety-part">${w}</span> — weather and geological events imply overwhelming, rapid, or large-scale impact. A popular convention among nation-state attribution frameworks.`;
+    return `Drawn from the natural world: <span class="ety-part">${w}</span> references a geological feature or natural phenomenon, projecting power, unpredictability, and environmental scale.`;
   },
   mythological: (word) =>
-    `Derived from <span class="ety-part">${word}</span>, a figure from ancient mythology associated with power, destruction, or deception. Mythological names signal intent and project psychological weight.`,
+    `Derived from <span class="ety-part">${esc(word)}</span>, a figure from ancient mythology associated with power, destruction, or deception. Mythological names signal intent and project psychological weight.`,
   technical: (word) =>
-    `References the technical concept of <span class="ety-part">${word}</span>, a nod to the underlying exploitation technique or attack surface leveraged by this entity.`,
+    `References the technical concept of <span class="ety-part">${esc(word)}</span>, a nod to the underlying exploitation technique or attack surface leveraged by this entity.`,
   literature: (word) =>
-    `Drawn from literary canon, <span class="ety-part">${word}</span> carries thematic weight: betrayal, obsession, or descent. Literature names often reflect the actor's self-perception or tactical philosophy.`,
+    `Drawn from literary canon, <span class="ety-part">${esc(word)}</span> carries thematic weight: betrayal, obsession, or descent. Literature names often reflect the actor's self-perception or tactical philosophy.`,
   mashup: (word1, word2) =>
-    `A compound of <span class="ety-part">${word1}</span> and <span class="ety-part">${word2}</span> from different naming traditions. Hybrid names are intentionally disorienting and harder to attribute.`,
+    `A compound of <span class="ety-part">${esc(word1)}</span> and <span class="ety-part">${esc(word2)}</span> from different naming traditions. Hybrid names are intentionally disorienting and harder to attribute.`,
 };
 
 // ── Utility ──
@@ -415,6 +416,24 @@ function pickWordFromFlavour(flavour) {
   return pick(bank[key]);
 }
 
+// ── Security helpers ──
+
+// Escape HTML entities before any innerHTML injection
+function esc(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#x27;');
+}
+
+// Validate a name coming from an untrusted source (GitHub API)
+const NAME_PATTERN = /^[\w\s\-\.\(\)\/]{1,80}$/;
+function isSafeName(str) {
+  return typeof str === 'string' && NAME_PATTERN.test(str);
+}
+
 // ── GitHub repo config ──
 const GITHUB_REPO = 'yotamgutman/cyber-name-generator';
 const ISSUE_TEMPLATE = '.github/ISSUE_TEMPLATE/name-submission.yml';
@@ -439,15 +458,30 @@ function buildClaimIssueURL(name, type) {
 }
 
 // ── Load claimed names from GitHub Issues API ──
+// Read-only, unauthenticated public API call. No tokens are used or stored.
+// Rate-limited to one call per session via sessionStorage flag.
+const ALLOWED_CLAIM_TYPES = new Set(['group', 'campaign', 'malware']);
+const CLAIM_TITLE_RE = /^Claim:\s*(.{1,80}?)\s*\((group|campaign|malware)\)\s*$/i;
+
 function loadClaimedNames() {
-  fetch(`https://api.github.com/repos/${GITHUB_REPO}/issues?labels=claimed&state=open&per_page=100`)
+  if (sessionStorage.getItem('claimedLoaded')) return;
+  sessionStorage.setItem('claimedLoaded', '1');
+
+  fetch(`https://api.github.com/repos/${GITHUB_REPO}/issues?labels=claimed&state=open&per_page=100`, {
+    method: 'GET',
+    headers: { 'Accept': 'application/vnd.github.v3+json' },
+  })
     .then(r => r.ok ? r.json() : [])
     .then(issues => {
+      if (!Array.isArray(issues)) return;
       let added = 0;
       issues.forEach(issue => {
-        const match = issue.title.match(/^Claim:\s*(.+?)\s*\((\w+)\)\s*$/i);
+        if (typeof issue.title !== 'string') return;
+        const match = issue.title.match(CLAIM_TITLE_RE);
         if (!match) return;
-        const [, name, type] = match;
+        const name = match[1].trim();
+        const type = match[2].toLowerCase();
+        if (!isSafeName(name) || !ALLOWED_CLAIM_TYPES.has(type)) return;
         if (type === 'group') KNOWN_NAMES.groups.add(name);
         else if (type === 'campaign') KNOWN_NAMES.campaigns.add(name);
         else if (type === 'malware') KNOWN_NAMES.malware.add(name);
@@ -580,15 +614,17 @@ function renderSaved() {
     list.innerHTML = '<p class="saved-empty">No names saved yet</p>';
     return;
   }
-  list.innerHTML = savedNames.map((s, i) => `
-    <div class="saved-item">
-      <span class="saved-item-name">${s.name}</span>
+  const ALLOWED_TYPES = new Set(['group','campaign','malware']);
+  list.innerHTML = savedNames.map((s) => {
+    const safeType = ALLOWED_TYPES.has(s.type) ? s.type : 'group';
+    return `<div class="saved-item">
+      <span class="saved-item-name">${esc(s.name)}</span>
       <span class="saved-item-meta">
-        <span class="saved-item-type type-${s.type}-tag">${s.type.toUpperCase()}</span>
-        <button class="remove-saved" data-name="${s.name}" title="Remove">&#x2715;</button>
+        <span class="saved-item-type type-${safeType}-tag">${safeType.toUpperCase()}</span>
+        <button class="remove-saved" data-name="${esc(s.name)}" title="Remove">&#x2715;</button>
       </span>
-    </div>
-  `).join('');
+    </div>`;
+  }).join('');
 
   list.querySelectorAll('.remove-saved').forEach(btn => {
     btn.addEventListener('click', () => removeFromSaved(btn.dataset.name));
