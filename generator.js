@@ -376,14 +376,26 @@ function isKnownName(name, type) {
 
 const REAL_FLAVOURS = ['natural','mythological','technical','literature','mashup'];
 
-function generateName(type, flavour) {
+const ANCHOR_PATTERN = /^[A-Za-z][A-Za-z0-9\-]{0,38}$/;
+
+function generateName(type, flavour, anchorWord) {
   let baseWord, secondWord, flavourLabel, etymologyText;
+
+  // Sanitize and validate anchor word if provided
+  const anchor = (typeof anchorWord === 'string' && anchorWord.trim().length > 0)
+    ? anchorWord.trim()
+    : null;
+  const useAnchor = anchor && ANCHOR_PATTERN.test(anchor);
 
   if (flavour === 'random') {
     flavour = pick(REAL_FLAVOURS);
   }
 
-  if (flavour === 'mashup') {
+  if (useAnchor) {
+    baseWord = capitalize(anchor);
+    flavourLabel = 'Custom';
+    etymologyText = `Built around your anchor word <span class="ety-part">${esc(baseWord)}</span>. The pattern and suffix are drawn from the selected type.`;
+  } else if (flavour === 'mashup') {
     const flavours = ['natural','mythological','technical','literature'];
     const f1 = pick(flavours);
     let f2 = pick(flavours.filter(f => f !== f1));
@@ -391,8 +403,6 @@ function generateName(type, flavour) {
     secondWord = pickWordFromFlavour(f2);
     flavourLabel = `${capitalize(f1)} + ${capitalize(f2)}`;
     etymologyText = ETYMOLOGY.mashup(baseWord, secondWord);
-
-    // for mashup, combine words into a single base
     baseWord = baseWord + secondWord;
   } else {
     baseWord = pickWordFromFlavour(flavour);
@@ -552,10 +562,11 @@ function showResult(type, flavour) {
   setTimeout(() => {
     const strict = document.getElementById('opt-strict').checked;
     const explain = document.getElementById('opt-explain').checked;
+    const anchorWord = document.getElementById('anchor-input').value.trim();
 
     let result, attempts = 0;
     do {
-      result = generateName(type, flavour);
+      result = generateName(type, flavour, anchorWord);
       attempts++;
     } while (strict && isKnownName(result.name, type) && attempts < 20);
 

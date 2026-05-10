@@ -201,6 +201,18 @@ main {
   font-weight: 600;
 }
 
+.control-label-hint {
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  opacity: 0.55;
+  font-weight: 400;
+  text-transform: lowercase;
+  margin-left: 0.4rem;
+}
+
+.anchor-input { margin-bottom: 0; }
+
 .pill-group {
   display: flex;
   flex-wrap: wrap;
