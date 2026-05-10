@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://yotamgutman.github.io/cyber-name-generator/sitemap.xml
+Sitemap: https://cyberpros.co/sitemap.xml
