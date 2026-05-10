@@ -660,6 +660,88 @@ main {
 
 .export-btn:hover { color: var(--green); background: rgba(0,255,136,0.04); }
 
+/* ── About section ── */
+.about-section {
+  border-top: 1px solid var(--border);
+  padding: 2.5rem 2.5rem;
+  background: var(--surface2);
+}
+
+.about-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  gap: 1.75rem;
+  align-items: flex-start;
+}
+
+.about-avatar {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--cmp-yellow);
+  background: rgba(255,184,0,0.1);
+  border: 1px solid rgba(255,184,0,0.3);
+  border-radius: 50%;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  letter-spacing: 0.05em;
+}
+
+.about-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.about-name {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--text-bright);
+  margin: 0;
+}
+
+.about-bio {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  max-width: 680px;
+}
+
+.about-bio strong {
+  color: var(--text);
+}
+
+.about-links {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+.about-link {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--cyan);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  opacity: 0.8;
+  transition: opacity 0.15s;
+}
+
+.about-link:hover { opacity: 1; }
+
+.about-sep {
+  color: var(--border-bright);
+  font-size: 0.6rem;
+}
+
 /* ── Footer ── */
 footer {
   border-top: 1px solid var(--border);
