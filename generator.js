@@ -398,38 +398,11 @@ function generateName(type, flavour, anchorWord) {
       : flavour;
     const flavourWord = pickWordFromFlavour(effectiveFlavour);
     flavourLabel = 'Custom';
-    etymologyText = `Built around your anchor word <span class="ety-part">${esc(baseWord)}</span>, combined with <span class="ety-part">${esc(flavourWord)}</span> from the ${effectiveFlavour} word bank.`;
+    etymologyText = `Built around your anchor word <span class="ety-part">${esc(baseWord)}</span>, paired with <span class="ety-part">${esc(flavourWord)}</span> from the ${effectiveFlavour} word bank.`;
 
-    const ANCHOR_PATTERNS = {
-      group: [
-        (a, w) => `${a} ${w}`,
-        (a, w) => `${w} ${a}`,
-        (a, w) => `${a}${w} Group`,
-        (a, w) => `${a} ${w} Collective`,
-      ],
-      campaign: [
-        (a, w) => `Operation ${a}${w}`,
-        (a, w) => `Operation ${a} ${w}`,
-        (a, w) => `Operation ${w} ${a}`,
-        (a, w) => `${a} Storm`,
-        (a, w) => `${a} Wave`,
-        (a, w) => `${a} Strike`,
-        (a, w) => `${a} Tide`,
-        (a, w) => `${a} Surge`,
-        (a, w) => `${a} Veil`,
-        (a, w) => `${a} Breach`,
-        (a, w) => `${a} Protocol`,
-        (a, w) => `${a}${w} Initiative`,
-        (a, w) => `Project ${a}${w}`,
-        (a, w) => `${a} ${w} Tide`,
-      ],
-      malware: [
-        (a, w) => `${a}${w}`,
-        (a, w) => `${w}${a}`,
-        (a, w) => `${a}.${w}`,
-      ],
-    };
-    const name = pick(ANCHOR_PATTERNS[type])(baseWord, flavourWord);
+    const patterns = TYPE_PATTERNS[type].patterns;
+    const pattern = pick(patterns);
+    const name = pattern(baseWord, flavourWord);
     return { name, flavourLabel, etymologyText };
   } else if (flavour === 'mashup') {
     const flavours = ['natural','mythological','technical','literature'];
