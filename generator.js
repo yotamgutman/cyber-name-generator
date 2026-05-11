@@ -416,6 +416,36 @@ function generateName(type, flavour, anchorWord) {
         () => `${baseWord}${flavourWord}Crypt`,
       ];
       name = pick(anchorMalwarePatterns)();
+    } else if (type === 'group') {
+      const animals = ['Bear','Tiger','Dragon','Panda','Lynx','Jackal','Fox','Hawk','Wolf','Viper'];
+      const animal = pick(animals);
+      const anchorGroupPatterns = [
+        () => `${flavourWord} ${baseWord}`,
+        () => `${baseWord} ${flavourWord}`,
+        () => `${flavourWord} ${baseWord} Group`,
+        () => `${baseWord} ${flavourWord} Group`,
+        () => `${flavourWord} ${baseWord} ${animal}`,
+        () => `${baseWord} ${flavourWord} ${animal}`,
+        () => `${flavourWord}${baseWord}`,
+        () => `${baseWord} ${flavourWord} Syndicate`,
+        () => `${flavourWord} ${baseWord} Collective`,
+        () => `${baseWord} ${flavourWord} Crew`,
+      ];
+      name = pick(anchorGroupPatterns)();
+    } else if (type === 'campaign') {
+      const anchorCampaignPatterns = [
+        () => `Operation ${baseWord} ${flavourWord}`,
+        () => `Operation ${flavourWord} ${baseWord}`,
+        () => `${flavourWord} ${baseWord}`,
+        () => `${baseWord} ${flavourWord}`,
+        () => `${baseWord} ${flavourWord} Strike`,
+        () => `${flavourWord} ${baseWord} Wave`,
+        () => `Project ${flavourWord} ${baseWord}`,
+        () => `Project ${baseWord} ${flavourWord}`,
+        () => `${baseWord} ${flavourWord} Protocol`,
+        () => `${flavourWord} ${baseWord} Surge`,
+      ];
+      name = pick(anchorCampaignPatterns)();
     } else {
       const patterns = TYPE_PATTERNS[type].patterns;
       const pattern = pick(patterns);
