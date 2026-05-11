@@ -400,9 +400,27 @@ function generateName(type, flavour, anchorWord) {
     flavourLabel = 'Custom';
     etymologyText = `Built around your anchor word <span class="ety-part">${esc(baseWord)}</span>, paired with <span class="ety-part">${esc(flavourWord)}</span> from the ${effectiveFlavour} word bank.`;
 
-    const patterns = TYPE_PATTERNS[type].patterns;
-    const pattern = pick(patterns);
-    const name = pattern(baseWord, flavourWord);
+    let name;
+    if (type === 'malware') {
+      const suffix = pick(['Bot','RAT','Kit','Loader','Stealer','Dropper','Worm','Lock','Crypt','Spy','Net','X']);
+      const anchorMalwarePatterns = [
+        () => `${baseWord}${flavourWord}`,
+        () => `${flavourWord}${baseWord}`,
+        () => `${baseWord}${flavourWord}${suffix}`,
+        () => `${flavourWord}${baseWord}${suffix}`,
+        () => `${baseWord}${flavourWord}Bot`,
+        () => `${baseWord}${flavourWord}RAT`,
+        () => `${flavourWord}${baseWord}Kit`,
+        () => `${flavourWord}${baseWord}Stealer`,
+        () => `${flavourWord}${baseWord}Loader`,
+        () => `${baseWord}${flavourWord}Crypt`,
+      ];
+      name = pick(anchorMalwarePatterns)();
+    } else {
+      const patterns = TYPE_PATTERNS[type].patterns;
+      const pattern = pick(patterns);
+      name = pattern(baseWord, flavourWord);
+    }
     return { name, flavourLabel, etymologyText };
   } else if (flavour === 'mashup') {
     const flavours = ['natural','mythological','technical','literature'];
