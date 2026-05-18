@@ -176,6 +176,7 @@ main {
   padding: 2rem 2.5rem;
   gap: 2rem;
   align-items: start;
+  align-content: start;
 }
 
 /* ── Controls panel ── */
